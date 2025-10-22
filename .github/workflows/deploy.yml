@@ -1,0 +1,41 @@
+name: 🍀 diploy & quality
+
+on:
+   push:
+      branches:
+         - main
+   workflow_dispatch:
+
+permissions:
+   contents: read
+   pages: write
+   id-token: write 
+
+concurrency: 
+   group: ${{ github.workflow }}-${{ github.ref }}
+   cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: 
+    runs-on: ubuntu-lateste
+    if: github.ref =='refs/origin/main'
+    outputs:
+      page_url: ${{steps.deployment.outputs.page_url}}
+   environment:
+      name: github-pages
+      url:   
+
+   steps:
+      - name: 🌷checkout code
+        uses: actions/configure-peges@4
+
+      - name: 🌼 Upload artifact
+        uses: action/Upload-pages-artifact@4
+        with:
+          path: "."
+
+      - name: 🍄 Deploy to GitHub pages
+        id: deployment
+        uses: actions/Deploy-pages@v4
+   
