@@ -22,11 +22,12 @@ jobs:
     if: github.ref =='refs/origin/main'
     outputs:
       page_url: ${{steps.deployment.outputs.page_url}}
-   environment:
-      name: github-pages
-      url:   
 
-   steps:
+    environment:
+      name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}  
+
+    steps:
       - name: 🌷checkout code
         uses: actions/configure-peges@4
 
@@ -38,4 +39,5 @@ jobs:
       - name: 🍄 Deploy to GitHub pages
         id: deployment
         uses: actions/Deploy-pages@v4
+           
    
